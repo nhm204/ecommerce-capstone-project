@@ -13,11 +13,11 @@ const ShowProducts = ({ searchQuery }) => {
   const [ sortProduct, setSortProduct ] = useState();
   const { loading, error, data } = useQueryGetProductList();
 
+
   const productList = data?.products.map((product) => product);
   let filteredList = productList;
 
 
-  // console.log(searchQuery)
   filteredList = useMemo(() => {
     if (searchQuery) {
       return productList.filter(product => product.name.toLowerCase().includes(searchQuery)); 
@@ -28,12 +28,10 @@ const ShowProducts = ({ searchQuery }) => {
   
   filteredList = useMemo(() => {
     if (color) {
-      // return filteredList.filter(() => (productsColorObj.find(element => element === color)));
       return filteredList.filter(product => product.colors.map(color => color.name).find(element => element === color)); 
     }
     return filteredList;
   }, [color, filteredList]);
-  // console.log(filteredList)
 
   
   filteredList = useMemo(() => {
@@ -125,19 +123,26 @@ const ShowProducts = ({ searchQuery }) => {
           <div className='option default' onClick={() => setSortProduct()}>Reset</div>
         </div>
       </div>
-      <ul className='product-list'>
-        { filteredList.map((product => (
-          <li key={product.id}>
-            <Product product={product} />   
-          </li>
-        )))} 
-      </ul>
+      <div className='products-wrapper'>
+        <ul className='product-list'>
+          { filteredList.map((product => (
+            <li key={product.id}>
+              <Product product={product} />   
+            </li>
+          )))} 
+        </ul>
+        { filteredList.length !== 0 ? <div className='end'>There are no more products</div> : <div className='end'>There is no matching product</div> }
+      </div>
     </div>
   )
 }
 
 const Products = () => {
   const [ searchQuery, setSearchQuery ] = useState();
+
+  useEffect(() => {
+    document.title = `Shop. Nike For You`;
+  }, []);
 
   let searchValue = localStorage.getItem('searchValue');
   useEffect(() => setSearchQuery(searchValue), [searchValue]);

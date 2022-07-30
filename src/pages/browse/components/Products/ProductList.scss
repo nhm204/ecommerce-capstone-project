@@ -39,6 +39,7 @@
 
     .filter-products {
         display: flex;
+        justify-content: space-between;
 
         .filter {
             display: flex;
@@ -105,7 +106,7 @@
                     width: 40px;
                     height: 40px;
                     border-radius: 50%;
-                    border: 2px solid white;
+                    border: 3px solid white;
                     outline: 1px solid #ccc;
                     margin-right: 1vw;
                     margin-top: 2vh;
@@ -194,21 +195,30 @@
             }
         }
         
-        .product-list {
-            flex: 1;
+        .products-wrapper {
+            width: 80vw;
+            padding: 0 3vw;
+
+            .product-list {
+                flex: 1;
+            }
+    
+            .end {
+                font-size: 2.4rem;
+                text-align: center;
+                padding: 5vh 0;
+            }
         }
     }
 
     .product-list {
         display: flex;
-        // justify-content: center;
-        padding: 0 3vw 0 2vw;
         flex-wrap: wrap;
 
         li {
             max-width: 22vw;
             // flex: 1;
-            min-width: 300px;
+            min-width: 320px;
             margin: 2vh 0;
             padding: 0 1vw;
         }

@@ -3,9 +3,11 @@ import './Navbar.scss';
 import { IoBagHandleOutline, IoCloseOutline } from "react-icons/io5";
 import { FiSearch } from "react-icons/fi";
 import { Link, useNavigate } from 'react-router-dom';
+import { useQueryGetCustomer } from '../../data/queries/getCustomer';
 
 
 const Navbar = ({ setSearchQuery, searchValue }) => {
+  const { data } = useQueryGetCustomer();
   const [ inputValue, setInputValue] = useState('');
   const navigate = useNavigate();
 
@@ -23,14 +25,13 @@ const Navbar = ({ setSearchQuery, searchValue }) => {
     setSearchQuery(e.target.value);
   };
 
-
   const handleClear = () => {
     localStorage.removeItem('searchValue');
     setSearchQuery();
     setInputValue('');
   };
 
-
+  
   return (
     <nav className='navbar'>
       <Link to='/' className='logo'></Link>
@@ -45,10 +46,10 @@ const Navbar = ({ setSearchQuery, searchValue }) => {
           <input type='text' placeholder='Search' className='search-input' value={inputValue} onKeyPress={handleDirect} onChange={handleChange} />
           <IoCloseOutline onClick={handleClear} className='erase-icon' />
         </div>
-        <div className='cart'>
+        <Link to='/checkout' className='cart'>
           <IoBagHandleOutline className='cart-icon' />
-          <div className='badge'>10</div>
-        </div>
+          <div className='badge'>{data?.customer.items.length}</div>
+        </Link>
       </div>
     </nav>
   )
