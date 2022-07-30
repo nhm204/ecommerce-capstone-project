@@ -1,0 +1,115 @@
+.navbar {
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2vh 4vw;
+    height: var(--navbar-height);
+    width: 100vw;
+    z-index: 99;
+    background-color: white;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+    .logo {
+        background-image: url(../../assets/img/nike-logo.png);
+        width: 150px;
+        height: 80px;
+        background-size: cover;
+    }
+
+    .middle {
+        display: flex;
+        align-items: center;
+
+        .nav-link {
+            display: block;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-left: 3vw;
+            color: var(--text-color);
+
+            &:hover {
+                color: darkorange;
+                cursor: pointer;
+            }
+        }
+    }
+
+    .right-side {
+        display: flex;
+        align-items: center;
+
+        .searchbar {
+            display: flex;
+            align-items: center;
+            background-color: #f5f5f5;
+            padding: 1.2vh 1vw;
+            border-radius: 20px;
+            margin-right: 1vw;
+            position: relative;
+
+            &:hover {
+                background-color: #e5e5e5;
+                cursor: text;
+
+                .erase-icon {
+                    display: block;
+                }
+            }
+
+            .icon {
+                font-size: 2rem;
+                margin-right: 0.8vw;
+                margin-left: -0.2vw;
+                cursor: default;
+            }
+
+            .search-input {
+                font-size: 1.6rem;
+                background-color: transparent;
+                outline: none;
+                border: none;
+            }
+
+            .erase-icon {
+                font-size: 2rem;
+                margin-left: 0.6vw;
+                cursor: pointer;
+                display: none;
+            }
+        }
+
+        .cart {
+            position: relative;
+            margin-right: 2.5vw;
+
+            .cart-icon {
+                font-size: 3rem;
+                padding: 0 8px;
+                border-radius: 50%;
+                height: 40px;
+                width: 40px;
+                cursor: pointer;
+                margin-top: 5px;
+                
+                &:hover {
+                    background-color: #f5f5f5;
+                }
+            }
+
+            .badge {
+                position: absolute;
+                top: 10px;
+                right: -2px;
+                padding: 3px 4px 0 5px;
+                background-color: darkorange;
+                font-size: 1.2rem;
+                line-height: 1.2rem;
+                border-radius: 20px;
+                font-weight: 600;
+                user-select: none;
+                cursor: pointer;
+            }
+        }
+    }
+}

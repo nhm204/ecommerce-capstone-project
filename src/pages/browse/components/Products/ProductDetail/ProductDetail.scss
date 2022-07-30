@@ -1,0 +1,120 @@
+.product-detail {
+    display: flex;
+    justify-content: space-between;
+    padding: calc(var(--navbar-height) + 6vh) 4vw 4vh;
+
+    .image-container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 55vw;
+
+        img, video {
+            width: 26vw;
+            height: fit-content;
+            margin: 1vh 1vw 1vh 0;
+        }
+    }
+
+    .detail {
+        width: 33vw;
+
+        .name {
+            font-size: 4.4rem;
+            line-height: 4.4rem;
+            font-weight: 600;
+            margin-top: 1vh;
+        }
+
+        h4 {
+            font-size: 2.2rem;
+            font-weight: 300;
+            margin-top: 1vh;
+        }
+
+        .price {
+            padding-top: 5vh;
+            font-size: 3.3rem;
+            font-weight: 700;
+            color: darkorange;
+            text-align: end;
+        }
+
+        .size-selection {
+            padding: 8vh 0 4vh;
+
+            p {
+                font-weight: 300;
+                margin-bottom: 1vh;
+            }
+
+            .wrapper {
+                display: flex;
+                flex-wrap: wrap;
+
+                .size {
+                    padding: 1.9vh 0 1.2vh;
+                    border-radius: 5px;
+                    border: 1px solid #ccc;
+                    margin-right: 0.6vw;
+                    margin-top: 1vh;
+                    cursor: pointer;
+                    width: 6vw;
+                    text-align: center;
+
+                    &:hover {
+                        border-color: black;
+                    }
+                }
+            }
+        }
+
+        .color-selection {
+            padding: 2vh 0;
+
+            p {
+                font-weight: 300;
+                margin-bottom: 1vh;
+            }
+
+            .wrapper {
+                display: flex;
+                flex-wrap: wrap;
+
+                .color {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    border: 2px solid white;
+                    outline: 1px solid #ccc;
+                    margin-right: 0.7vw;
+                    margin-top: 1.2vh;
+                    cursor: pointer;
+
+                    &:hover {
+                        outline-color: black;
+                    }
+                }
+            }
+        }
+
+        .add {
+            width: 100%;
+            color: white;
+            font-size: 2.2rem;
+            padding: 3vh 0;
+            border-radius: 50px;
+            background-color: var(--primary-color);
+            margin: 10vh 0;
+            cursor: pointer;
+
+            &:hover {
+                color: var(--primary-color);
+                background-color: darkorange;
+            }
+        }
+
+        .quote {
+            line-height: 3rem;
+        }
+    }
+}
