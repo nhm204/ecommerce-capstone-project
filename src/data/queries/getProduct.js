@@ -9,11 +9,14 @@ const GET_PRODUCTS = gql `
     stock
     colors {
       name
+      hexValue
     }
     description
     categories
     pictures
     sizes
+    featuringFrom
+    featuringTo
   }
 }
 `;

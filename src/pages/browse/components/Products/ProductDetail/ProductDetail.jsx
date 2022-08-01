@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useQueryGetProductList } from '../../../../../data/queries/getProduct';
 import { useQueryGetCustomer } from '../../../../../data/queries/getCustomer';
 import { useMutationAddItemToCart } from '../../../../../data/mutations/addToCart';
+import Tag from '../../Tag/Tag';
 
 
 const ProductDetail = () => {
@@ -12,17 +13,22 @@ const ProductDetail = () => {
   const customerQuery = useQueryGetCustomer();
   const [ addItemToCartMutation ] = useMutationAddItemToCart();
   const [ size, setSize ] = useState();
+  const [ sizeSelected, setSizeSelected] = useState();
   const [ color, setColor ] = useState();
+  const [ colorSelected, setColorSelected] = useState();
   const paramValue = useParams();
   const productId = paramValue.id;
+  const productName = paramValue.name;
   
 
   const product = data?.products.find(element => element.id === paramValue.id);
   let productImage = product?.pictures?.slice(1); // Remove the first element of picture array
-  const colorArr = product?.colors.map((color) => color.name.toLowerCase());
+  const colorArr = product?.colors.map((color) => color.hexValue);
+  // const productsColorObj = productList.map((product) => product.colors.map((color) => color.name)); // lấy ra tên màu từ obj colors
+  // const productsColorObj = data?.products.map((product) => product.colors); // lấy ra màu từ obj colors
 
   useEffect(() => {
-    document.title = `Nike ${product?.name}`
+    document.title = `${product?.name}`
   }, [product?.name]);
 
   const handleAdd = useCallback(() => {
@@ -39,19 +45,18 @@ const ProductDetail = () => {
     }).then(() => {
       customerQuery.refetch();
     })
-    console.log('re-render')
   }, [addItemToCartMutation, product?.id, color, size, customerQuery]);
 
-  console.log('color:' + color, 'size:' + size)
+  console.log(colorSelected, sizeSelected)
 
   if (error) return <h1>Error: {error} </h1>;
-  if (loading) return <h2 style={{ textAlign: 'center', padding: '8vh 0', fontWeight: '500' }}>Loading your product...</h2>;
+  if (loading) return <h2 style={{ textAlign: 'center', padding: '12vh 0', fontWeight: '500' }}>Loading your product...</h2>;
 
-  
   return (
     <div id={productId}>
-      <Navbar />
+      <Navbar link={'Shop'} />
       <div className='product-detail'>
+        <Tag product={product} />
         <div className='image-container'>
           {
             productImage.map((picture, index) => (
@@ -60,26 +65,46 @@ const ProductDetail = () => {
           }
         </div>
         <div className='detail'>
-          <h2 className='name'>Nike {product.name}</h2>
+          <h2 className='name'>{productName}</h2>
           <h4 className='desc'>{product.description}</h4>
           <p className='price'>${product.price}</p>
           <div className='size-selection'>
               <p>Select size</p>
               <div className="wrapper">
-                { product.sizes.map((size, index) => (
-                    <div key={index} className='size' onClick={() => setSize(size)}>{size}</div>
+                { product.stock === 0 ? product.sizes.map((size, index) => (
+                    <div key={index} className='size disable'>{size}</div>
+                )) : product.sizes.map((size, index) => (
+                    <div 
+                      key={index} 
+                      className={sizeSelected === size ? 'size select' : 'size'} 
+                      onClick={() => { 
+                        setSize(size); 
+                        setSizeSelected(size) 
+                      }}>
+                      {size}
+                    </div>
                 ))}
               </div>
           </div>
           <div className='color-selection'>
               <p>Select color</p>
               <div className="wrapper">
-                { colorArr.map((color, index) => (
-                    <div key={index} className='color' style={{ backgroundColor: `${color}`}} onClick={() => setColor(color)}></div>
+                { product.stock === 0 ? colorArr.map((color, index) => (
+                    <div key={index} className='color disable' style={{ backgroundColor: `${color}`}}></div>
+                )) : colorArr.map((color, index) => (
+                    <div 
+                      key={index} 
+                      className={colorSelected === color ? 'color select' : 'color'}  
+                      style={{ backgroundColor: `${color}`}} 
+                      onClick={() => {
+                        setColor(color);
+                        setColorSelected(color)
+                      }}>
+                    </div>
                 ))}
               </div>
           </div>
-          { product !== 0 ? <button className='add' onClick={handleAdd}>Add to Bag</button> : <button className='add disable'>Add to Bag</button> }
+          { product.stock !== 0 ? <button className='add' onClick={handleAdd}>Add to Bag</button> : <button className='add disable'>Add to Bag</button> }
           <h4 className='quote'>Keep pushing your runs to the limit. The {product.name} keeps you going with the same supersoft feel that lets you feel the potential when your foot hits the pavement. We created the shoe with plenty of snappy responsiveness and our highest level of support to keep you feeling secure and competitive. It's one of our most tested shoes, still designed for you to stay on the track and away from the sidelines.</h4>
         </div>
       </div>

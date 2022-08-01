@@ -1,0 +1,19 @@
+.home {
+    .header {
+        text-align: center;
+        padding: calc(var(--navbar-height) + 6vh) 0 0;
+        color: var(--text-color);
+        user-select: none;
+
+        p {
+            font-weight: 300;
+            margin: 12px 0;
+            font-size: 2rem;
+        }
+
+        h2 {
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+    }
+}

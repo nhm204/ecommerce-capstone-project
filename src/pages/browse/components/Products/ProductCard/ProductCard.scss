@@ -25,11 +25,25 @@
         & .disable {
             color: white;
             background-color: rgb(174, 174, 174);
+            outline: none;
+            font-weight: 400;
         }
     }
 
     .product {
         color: var(--text-color);
+
+        .tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 0.5vh 1vw 0.3vh;
+            color: darkorange;
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 0 10px #ccc;
+            user-select: none;
+        }
 
         img {
             width: 100%;

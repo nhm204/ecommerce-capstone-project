@@ -1,7 +1,22 @@
 .product-detail {
+    position: relative;
     display: flex;
     justify-content: space-between;
     padding: calc(var(--navbar-height) + 6vh) 4vw 4vh;
+
+    .tag {
+        position: absolute;
+        top: 19vh;
+        left: 5vw;
+        font-size: 1.6vw;
+        line-height: 2vw;
+        padding: 0.5vh 1vw 0;
+        color: darkorange;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: 0 0 10px #ccc;
+        user-select: none;
+    }
 
     .image-container {
         display: flex;
@@ -17,9 +32,10 @@
 
     .detail {
         width: 33vw;
+        color: var(--text-color);
 
         .name {
-            font-size: 4.4rem;
+            font-size: 4.5rem;
             line-height: 4.4rem;
             font-weight: 600;
             margin-top: 1vh;
@@ -37,10 +53,12 @@
             font-weight: 700;
             color: darkorange;
             text-align: end;
+            user-select: none;
         }
 
         .size-selection {
             padding: 8vh 0 4vh;
+            user-select: none;
 
             p {
                 font-weight: 300;
@@ -64,6 +82,21 @@
                     &:hover {
                         border-color: black;
                     }
+
+                }
+
+                .disable {
+                    color: #ccc;
+                    background-color: transparent;
+                    cursor: default;
+
+                    &:hover {
+                        border-color: #ccc;
+                    }
+                }
+                
+                .select {
+                    border-color: black;
                 }
             }
         }
@@ -94,6 +127,32 @@
                         outline-color: black;
                     }
                 }
+
+                .disable {
+                    position: relative;
+                    cursor: default;
+
+                    &::before {
+                        content: "";
+                        position: absolute;
+                        top: -3px;
+                        left: -3px;
+                        width: 34px;
+                        height: 34px;
+                        border-radius: 50%;
+                        background-color: rgba(204, 204, 204, 0.5);
+                        border: 3px solid white;
+                        // outline: 1px solid #ccc;
+                    }
+
+                    &:hover {
+                        outline-color: #ccc;
+                    }
+                }
+
+                .select {
+                    outline-color: black;
+                }
             }
         }
 
@@ -109,7 +168,10 @@
 
             &:hover {
                 color: var(--primary-color);
-                background-color: darkorange;
+                background-color: white;
+                border-color: transparent;
+                outline: 4px solid darkorange;
+                font-weight: 500;
             }
         }
 
@@ -121,11 +183,15 @@
             &:hover {
                 color: white;
                 background-color: rgb(174, 174, 174);
+                outline: none;
+                font-weight: 400;
             }
         }
 
         .quote {
-            line-height: 3rem;
+            line-height: 3.2rem;
+            text-align: justify;
+            text-justify: inter-word;
         }
     }
 }

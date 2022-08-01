@@ -3,6 +3,7 @@ import './ProductCard.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutationAddItemToCart } from '../../../../../data/mutations/addToCart';
 import { useQueryGetCustomer } from '../../../../../data/queries/getCustomer';
+import Tag from '../../Tag/Tag';
 
 
 const Product = ({ product }) => {
@@ -11,7 +12,7 @@ const Product = ({ product }) => {
   const navigate = useNavigate();
 
   const handleAdd = useCallback(() => {
-    if (product.stock === 1 && product.colors.length === 1 && product.sizes.length === 1) {
+    if (product.colors.length === 1 && product.sizes.length === 1) {
       addItemToCartMutation ({
         variables: {
           customerId: "hmy",
@@ -26,17 +27,18 @@ const Product = ({ product }) => {
         customerQuery.refetch();
       })
     } else {
-      navigate(`/shop/${product.id}`)
+      navigate(`/shop/${product.name}/${product.id}`)
     }
-  }, [addItemToCartMutation, product?.stock, product?.id, product?.colors, product?.sizes, navigate, customerQuery]);
+  }, [addItemToCartMutation, product.name, product?.id, product?.colors, product?.sizes, navigate, customerQuery]);
 
   return (
     <div className='product-wrapper'>
-      <Link to={`/shop/${product.id}`} className='product'>
+      <Link to={`/shop/${product.name}/${product.id}`} className='product'>
+        <Tag product={product} />
         <img src={product.pictures[0]} alt={product.name} />
         <div className='info'>
           <div className='description'>{product.description}</div>
-          <h5 className='name'>Nike {product.name}</h5>
+          <h5 className='name'>{product.name}</h5>
           <div className='price'>${product.price}</div>
         </div>
       </Link>

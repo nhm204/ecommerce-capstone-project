@@ -7,15 +7,32 @@ import { useQueryGetProductList } from '../../../../data/queries/getProduct';
 
 
 const ShowProducts = ({ searchQuery }) => { 
-  const [ selectedCategory, setSelectedCategory ] = useState();
+  const [ selectedCategory, setSelectedCategory ] = useState('');
   const [ color, setColor ] = useState();
   const [ price, setPrice ] = useState(0);
   const [ sortProduct, setSortProduct ] = useState();
   const { loading, error, data } = useQueryGetProductList();
 
-
   const productList = data?.products.map((product) => product);
   let filteredList = productList;
+
+  let featuredList = data?.products.filter(product => product.featuringFrom && product.featuringTo);
+  const currentDate = new Date();
+  featuredList = featuredList?.filter(product => {
+    const [ featuringFromDay, featuringFromMonth, featuringFromYear ] = product.featuringFrom.split('/');
+    const [ featuringToDay, featuringToMonth, featuringToYear ] = product.featuringTo.split('/');
+
+    const featuringFromDate = new Date(+featuringFromYear, +featuringFromMonth - 1, +featuringFromDay);
+    const featuringToDate = new Date(+featuringToYear, +featuringToMonth - 1, +featuringToDay);
+    
+    if (featuringFromDate <= currentDate && featuringToDate >= currentDate) {
+      return product;
+    }
+    return null;
+  })
+  
+  filteredList = filteredList?.filter(product => !featuredList.includes(product));
+  filteredList = featuredList?.concat(filteredList);
 
 
   filteredList = useMemo(() => {
@@ -23,8 +40,8 @@ const ShowProducts = ({ searchQuery }) => {
       return productList.filter(product => product.name.toLowerCase().includes(searchQuery)); 
     }
     return filteredList;
-  }, [filteredList, searchQuery, productList]);
-  
+  }, [searchQuery, productList, filteredList]);
+
   
   filteredList = useMemo(() => {
     if (color) {
@@ -33,18 +50,12 @@ const ShowProducts = ({ searchQuery }) => {
     return filteredList;
   }, [color, filteredList]);
 
-  
   filteredList = useMemo(() => {
     if (selectedCategory) {
       return filteredList.filter(product => product.categories.find(element => element === selectedCategory)); 
     }
     return filteredList;
   }, [selectedCategory, filteredList]);
-  
-  // const productsColorObj = productList.map((product) => product.colors.map((color) => color.name)); // lấy ra tên màu từ obj colors
-  // const productsColorObj = data?.products.map((product) => product.colors); // lấy ra màu từ obj colors
-  // let productColor = productsColorObj.map(product => product.find(item => item === 'White'))
-
 
   filteredList = useMemo(() => {
     if (price !== 0) {
@@ -53,6 +64,24 @@ const ShowProducts = ({ searchQuery }) => {
     return filteredList;
   }, [price, filteredList]);
 
+
+  featuredList = filteredList?.filter(product => {
+    if (product.featuringFrom && product.featuringTo) {
+      const [ featuringFromDay, featuringFromMonth, featuringFromYear ] = product.featuringFrom.split('/');
+      const [ featuringToDay, featuringToMonth, featuringToYear ] = product.featuringTo.split('/');
+
+      const featuringFromDate = new Date(+featuringFromYear, +featuringFromMonth - 1, +featuringFromDay);
+      const featuringToDate = new Date(+featuringToYear, +featuringToMonth - 1, +featuringToDay);
+      
+      if (featuringFromDate <= currentDate && featuringToDate >= currentDate) {
+        return product;
+      }
+    }
+    return null;
+  })
+
+  filteredList = filteredList?.filter(product => !featuredList.includes(product));
+ 
 
   filteredList = useMemo(() => {
     if (sortProduct === 'ASC') {
@@ -69,28 +98,27 @@ const ShowProducts = ({ searchQuery }) => {
     }
     return filteredList;
   }, [sortProduct, filteredList]);
-  
 
   if (error) return <h1>Error: {error} </h1>;
-  if (loading) return <h2>Loading... 🚀</h2>;
+  if (loading) return <h2 style={{ margin: '2vh auto' }}>Loading your products... 🚀</h2>;
 
   return (
     <div className='filter-products'>
       <div className='filter'>
-        <span>Gender</span>
+        <div className={selectedCategory === '' ? 'all active' : 'all'} onClick={() => setSelectedCategory('')}>All Shoes</div>
+        <span style={{ borderTop: '1px solid #ccc', paddingTop: '3vh' }}>Gender</span>
         <div className='selection'>
-          <div className='option' onClick={() => setSelectedCategory()}>All</div>
-          <div className='option' onClick={() => setSelectedCategory('Men')}>Men</div>
-          <div className='option' onClick={() => setSelectedCategory('Women')}>Women</div>
-          <div className='option' onClick={() => setSelectedCategory('Unisex')}>Unisex</div>
+          <div className={selectedCategory === 'Men' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Men')}>Men</div>
+          <div className={selectedCategory === 'Women' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Women')}>Women</div>
+          <div className={selectedCategory === 'Unisex' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Unisex')}>Unisex</div>
         </div>
         <span>Lifestyle</span>
         <div className='selection'>
-          <div className='option' onClick={() => setSelectedCategory('Jordan')}>Jordan</div>
-          <div className='option' onClick={() => setSelectedCategory('Shoes')}>Shoes</div>
-          <div className='option' onClick={() => setSelectedCategory('Running Shoes')}>Running Shoes</div>
-          <div className='option' onClick={() => setSelectedCategory('Skateboarding')}>Skateboarding</div>
-          <div className='option' onClick={() => setSelectedCategory('Training & Gym')}>Training &amp; Gym</div>
+          <div className={selectedCategory === 'Jordan' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Jordan')}>Jordan</div>
+          <div className={selectedCategory === 'Shoes' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Shoes')}>Shoes</div>
+          <div className={selectedCategory === 'Running Shoes' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Running Shoes')}>Running Shoes</div>
+          <div className={selectedCategory === 'Skateboarding' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Skateboarding')}>Skateboarding</div>
+          <div className={selectedCategory === 'Training & Gym' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Training & Gym')}>Training &amp; Gym</div>
         </div>
 
         <div className='color-selection-header'>
@@ -98,13 +126,13 @@ const ShowProducts = ({ searchQuery }) => {
           <span className='clear-color' onClick={() => setColor()}>Clear</span>
         </div>
         <div className='selection colors'>
-          <div className='color' style={{ backgroundColor: "black" }} onClick={() => setColor('Black')}></div>
-          <div className='color' style={{ backgroundColor: "aquamarine" }} onClick={() => setColor('Aquamarine')}></div>
-          <div className='color' style={{ backgroundColor: "white" }} onClick={() => setColor('White')}></div>
-          <div className='color' style={{ backgroundColor: "cornflowerblue" }} onClick={() => setColor('CornflowerBlue')}></div>
-          <div className='color' style={{ backgroundColor: "lightsalmon" }} onClick={() => setColor('LightSalmon')}></div>
-          <div className='color' style={{ backgroundColor: "rosybrown" }} onClick={() => setColor('RosyBrown')}></div>
-          <div className='color' style={{ backgroundColor: "sandybrown" }} onClick={() => setColor('SandyBrown')}></div>
+          <div className={color === 'Black' ? 'color select' : 'color'} style={{ backgroundColor: "black" }} onClick={() => setColor('Black')}></div>
+          <div className={color === 'Aquamarine' ? 'color select' : 'color'} style={{ backgroundColor: "aquamarine" }} onClick={() => setColor('Aquamarine')}></div>
+          <div className={color === 'White' ? 'color select' : 'color'} style={{ backgroundColor: "white" }} onClick={() => setColor('White')}></div>
+          <div className={color === 'University Blue' ? 'color select' : 'color'} style={{ backgroundColor: "#3c91d0" }} onClick={() => setColor('University Blue')}></div>
+          <div className={color === 'LightSalmon' ? 'color select' : 'color'} style={{ backgroundColor: "lightsalmon" }} onClick={() => setColor('LightSalmon')}></div>
+          <div className={color === 'Pink' ? 'color select' : 'color'} style={{ backgroundColor: "#cdb1a9" }} onClick={() => setColor('Pink')}></div>
+          <div className={color === 'Orange' ? 'color select' : 'color'} style={{ backgroundColor: "#e99b66" }} onClick={() => setColor('Orange')}></div>
         </div>
 
         <span className='price'>Price: <span style={{ color: "darkorange" }}>${price}</span></span>
@@ -114,17 +142,22 @@ const ShowProducts = ({ searchQuery }) => {
 
         <div className='sort-product'>
           <span className='sort'>Sort by price</span>
-          <div className='option' onClick={() => setSortProduct('ASC')}>Low to High</div>
-          <div className='option' onClick={() => setSortProduct('DESC')}>High to Low</div>
+          <div className={sortProduct === 'ASC' ? 'option active' : 'option'} onClick={() => setSortProduct('ASC')}>Low to High</div>
+          <div className={sortProduct === 'DESC' ? 'option active' : 'option'} onClick={() => setSortProduct('DESC')}>High to Low</div>
 
           <span className='sort'>Sort by name</span>
-          <div className='option' onClick={() => setSortProduct('A-Z')}>From A to Z</div>
-          <div className='option' onClick={() => setSortProduct('Z-A')}>From Z to A</div>
+          <div className={sortProduct === 'A-Z' ? 'option active' : 'option'} onClick={() => setSortProduct('A-Z')}>From A to Z</div>
+          <div className={sortProduct === 'Z-A' ? 'option active' : 'option'} onClick={() => setSortProduct('Z-A')}>From Z to A</div>
           <div className='option default' onClick={() => setSortProduct()}>Reset</div>
         </div>
       </div>
       <div className='products-wrapper'>
         <ul className='product-list'>
+          { featuredList.map(product => (
+            <li key={product.id}>
+              <Product product={product}/>   
+            </li>
+          ))}
           { filteredList.map((product => (
             <li key={product.id}>
               <Product product={product} />   
@@ -150,34 +183,15 @@ const Products = () => {
 
   return (
     <div className='products'>
-      <Navbar setSearchQuery={setSearchQuery} searchValue={searchQuery}  />
+      <Navbar setSearchQuery={setSearchQuery} searchValue={searchQuery} link={'Shop'} />
       <div className='banner'> 
         <h2>#stayhome</h2>
         <p>Save more with coupons &amp; up to 70% off!</p>
       </div>
-      <ShowProducts searchQuery={searchQuery}/> 
+      <ShowProducts searchQuery={searchQuery} /> 
       <Outlet />
     </div>
   )
 }
 
-const FeatureProducts = () => {
-  return (
-    <div className='products'>
-      <div className='header'>
-        <h2>Feature Products</h2>
-        <p>Summer Collection New Modern Design</p>
-      </div>
-      {/* <ul className='product-list'>
-        { products.slice(0, 4).map(product => (
-          <li key={product.id}>
-            <Product product={product}/>   
-          </li>
-        ))}
-      </ul> */}
-    </div>
-  )
-}
-
 export default Products;
-export { FeatureProducts };
