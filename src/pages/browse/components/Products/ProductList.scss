@@ -12,7 +12,7 @@
         align-items: center;
         flex-direction: column;
         color: white;
-        margin: calc(var(--navbar-height) + 5vh) 0 8vh;
+        margin: 4vh 0;
 
         p {
             margin: 2vh 0;
@@ -23,6 +23,7 @@
     .filter-products {
         display: flex;
         justify-content: space-between;
+        padding: calc(var(--navbar-height) + 5vh + 4vh) 0 0;
 
         .filter {
             display: flex;
@@ -166,7 +167,6 @@
 
             .sort-product {
                 padding-bottom: 2vh;
-                border-bottom: 1px solid #ccc;
 
                 .sort {
                     display: block;
@@ -212,6 +212,8 @@
         .products-wrapper {
             width: 80vw;
             padding: 0 3vw;
+            display: flex;
+            flex-direction: column;
 
             .product-list {
                 flex: 1;

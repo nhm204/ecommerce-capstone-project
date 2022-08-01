@@ -2,11 +2,11 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    padding: calc(var(--navbar-height) + 6vh) 4vw 4vh;
+    padding: calc(var(--navbar-height) + 5vh + 4vh) 4vw 4vh;
 
     .tag {
         position: absolute;
-        top: 19vh;
+        top: 22vh;
         left: 5vw;
         font-size: 1.6vw;
         line-height: 2vw;

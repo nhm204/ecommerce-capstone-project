@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import './ProductList.scss';
-import Product from './ProductCard/ProductCard';
 import Navbar from '../../../../common/Header/Navbar';
 import { useQueryGetProductList } from '../../../../data/queries/getProduct';
+import Pagination from '../Pagination/Pagination';
 
 
 const ShowProducts = ({ searchQuery }) => { 
@@ -14,7 +14,7 @@ const ShowProducts = ({ searchQuery }) => {
   const { loading, error, data } = useQueryGetProductList();
 
   const productList = data?.products.map((product) => product);
-  let filteredList = productList;
+  let filteredList = productList.reverse();
 
   let featuredList = data?.products.filter(product => product.featuringFrom && product.featuringTo);
   const currentDate = new Date();
@@ -99,6 +99,8 @@ const ShowProducts = ({ searchQuery }) => {
     return filteredList;
   }, [sortProduct, filteredList]);
 
+  filteredList = featuredList?.concat(filteredList);
+
   if (error) return <h1>Error: {error} </h1>;
   if (loading) return <h2 style={{ margin: '2vh auto' }}>Loading your products... 🚀</h2>;
 
@@ -152,19 +154,13 @@ const ShowProducts = ({ searchQuery }) => {
         </div>
       </div>
       <div className='products-wrapper'>
-        <ul className='product-list'>
-          { featuredList.map(product => (
-            <li key={product.id}>
-              <Product product={product}/>   
-            </li>
-          ))}
-          { filteredList.map((product => (
+          {/* { filteredList.map((product => (
             <li key={product.id}>
               <Product product={product} />   
             </li>
-          )))} 
-        </ul>
-        { filteredList.length !== 0 ? <div className='end'>There are no more products</div> : <div className='end'>There is no matching product</div> }
+          )))}  */}
+        { filteredList.length === 0 ? <div className='end'>There is no matching product</div> : null }
+        <Pagination products={filteredList} />
       </div>
     </div>
   )
@@ -184,11 +180,11 @@ const Products = () => {
   return (
     <div className='products'>
       <Navbar setSearchQuery={setSearchQuery} searchValue={searchQuery} link={'Shop'} />
+      <ShowProducts searchQuery={searchQuery} /> 
       <div className='banner'> 
         <h2>#stayhome</h2>
         <p>Save more with coupons &amp; up to 70% off!</p>
       </div>
-      <ShowProducts searchQuery={searchQuery} /> 
       <Outlet />
     </div>
   )
