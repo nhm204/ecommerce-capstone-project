@@ -9,7 +9,7 @@ const renderProducts = (products) => {
       { products.map((product => (
         <li key={product.id}>
           <Product product={product} />   
-        </li>
+        </li> 
       )))} 
     </ul>
   );

@@ -1,14 +1,11 @@
 import React from 'react';
 import './FeaturedProducts.scss';
-import { useQueryGetProductList } from '../../../../../data/queries/getProduct';
 import { Link } from 'react-router-dom';
 import Product from '../ProductCard/ProductCard';
 import { FaGreaterThan } from 'react-icons/fa';
 
-const FeaturedProducts = () => {
-  const { data } = useQueryGetProductList();
-
-  let featuredList = data?.products.filter(product => product.featuringFrom && product.featuringTo);
+const FeaturedProducts = ({ products }) => {
+  let featuredList = products?.filter(product => product.featuringFrom && product.featuringTo);
 
   const currentDate = new Date();
   featuredList = featuredList?.filter(product => {
@@ -17,7 +14,6 @@ const FeaturedProducts = () => {
 
     const featuringFromDate = new Date(+featuringFromYear, +featuringFromMonth - 1, +featuringFromDay);
     const featuringToDate = new Date(+featuringToYear, +featuringToMonth - 1, +featuringToDay);
-    console.log(featuringFromDate)
 
     if (featuringFromDate <= currentDate && featuringToDate >= currentDate) {
       return product;
@@ -29,7 +25,7 @@ const FeaturedProducts = () => {
   return (
     <div className='featured-products'>
       <ul className='product-list' style={{ justifyContent: 'center' }}>
-          { featuredList?.map((product, index) => (
+          { featuredList?.slice(0, 8).map((product, index) => (
             <li key={product.id}>
               <Product product={product} />   
             </li>

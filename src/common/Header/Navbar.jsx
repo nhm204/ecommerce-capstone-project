@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import './Navbar.scss';
 import { IoBagHandleOutline, IoCloseOutline } from "react-icons/io5";
 import { FiSearch } from "react-icons/fi";
-import { Link, useNavigate } from 'react-router-dom';
+import { createSearchParams, Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryGetCustomer } from '../../data/queries/getCustomer';
 
 
-const Navbar = ({ setSearchQuery, searchValue, link }) => {
+const Navbar = ({ setSearchQuery, searchValue, setSelectedCategory, link }) => {
   const { data } = useQueryGetCustomer();
+  const [ searchParams, setSearchParams ] = useSearchParams();
   const [ inputValue, setInputValue] = useState('');
   const [ navLinkSelected, setNavLinkSelected] = useState(link);
   const navigate = useNavigate();
@@ -15,21 +16,25 @@ const Navbar = ({ setSearchQuery, searchValue, link }) => {
   const handleDirect = (e) => {
     if (e.key === 'Enter') {
       localStorage.setItem('searchValue', e.target.value);
-      navigate('/shop');
+      navigate({ pathname: '/shop', search: `?search=${e.target.value}`});
     }
   }
-
+  
   useEffect(() => setInputValue(searchValue), [searchValue]);
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
     setSearchQuery(e.target.value);
+    setSearchParams({ search: e.target.value })
+    setSelectedCategory('');
   };
 
   const handleClear = () => {
     localStorage.removeItem('searchValue');
     setSearchQuery();
     setInputValue('');
+    setSearchParams();
+    setSelectedCategory('');
   };
  
  

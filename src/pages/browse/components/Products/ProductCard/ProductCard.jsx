@@ -44,6 +44,7 @@ const Product = ({ product }) => {
       </Link>
       { product.stock !== 0 ? <button className='add' onClick={handleAdd}>Add to Bag</button> : <button className='add disable'>Out of Stock</button> }
     </div>
+    || <div className='end'>There is no matching product</div>
   )
 }
 

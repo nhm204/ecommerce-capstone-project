@@ -80,7 +80,7 @@
                 margin-top: 50px;
                 border: none;
                 font-size: 1.5rem;
-                border-radius: 5px;
+                border-radius: 20px;
                 background-color: white;
                 
                 &:hover {
@@ -88,5 +88,27 @@
                 }
             }
         }
+    }
+}
+
+.banner3 {
+
+}
+
+.banner4 {
+    background-image: url(../../../../assets/img/banner1.jpg);
+    width: 100%;
+    height: 40vh;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    margin: 4vh 0;
+
+    p {
+        margin: 2vh 0;
+        font-weight: 300;
     }
 }
