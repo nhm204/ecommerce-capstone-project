@@ -43,3 +43,39 @@
         }
     }
 }
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .featured-products {
+        padding: 0;
+    
+        .product-list {
+    
+            li {
+                max-width: 22vw;
+                min-width: 320px;
+                margin: 1vh 0;
+                padding: 0 1.5vw;
+            }
+    
+            .more {
+                margin: 2vh 0 5vh;
+    
+                h4 {
+                    margin: 0 0.5vw 0 0;
+                }
+    
+                .icon {
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {}

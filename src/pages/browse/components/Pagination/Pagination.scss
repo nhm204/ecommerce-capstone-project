@@ -35,3 +35,19 @@
         border-color: darkorange;
     }
 }
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .pagination {
+        li {
+            padding-top: 0.3vh;
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {}

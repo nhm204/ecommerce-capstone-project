@@ -1,6 +1,6 @@
 .banner1 {
     position: relative;
-    padding: calc(var(--navbar-height) + 5vh) 0 0;
+    padding: calc(var(--navbar-height) + var(--marquee-height)) 0 0;
 
     img {
         width: 100%;
@@ -112,3 +112,65 @@
         font-weight: 300;
     }
 }
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .banner1 {
+        .label {
+            bottom: 2vh;
+            left: 3.5vw;
+
+            h2 {
+                font-size: 4.5rem;
+                line-height: 4rem;
+                letter-spacing: -3px;
+                margin-bottom: -0.2vh;
+            }
+
+            span {
+                font-size: 1.2rem;
+            }
+
+            .btn {
+                padding: 0.6vh 1.5vw 0.4vh;
+                font-size: 1.4rem;
+                margin-top: 2vh;
+            }
+        }
+    }
+
+    .banner2 {
+        .item {
+            .label--small {
+                font-size: 1.6rem;
+                line-height: 2rem;
+            }
+
+            .label {
+                font-size: 3.8rem;
+                line-height: 4.5rem;
+                margin-top: 36px;
+                text-align: center;
+            }
+
+            .label:nth-child(3) {
+                font-size: 4.8rem;
+            }
+
+            .link {
+                button {
+                    padding: 1.2vh 1.5vw 0.9vh;
+                }
+            }
+        }
+    }
+
+    
+}
+
+// Mobile
+@media (max-width: 46.1875em) {}

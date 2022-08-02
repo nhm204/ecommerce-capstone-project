@@ -100,3 +100,21 @@
         background-color: rgb(174, 174, 174);
     }
 }
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .product-wrapper {
+        .product {
+            .tag {
+                font-size: 1.4rem;
+                padding: 0.4vh 1vw 0.2vh;
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {}

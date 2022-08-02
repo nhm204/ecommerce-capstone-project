@@ -5,7 +5,6 @@ import { useQueryGetProductList } from '../../../../data/queries/getProduct';
 import Navbar from '../../../../common/Header/Navbar';
 import Pagination from '../Pagination/Pagination';
 import { Banner4 } from '../Banner/Banner';
-import { useSearchParams } from 'react-router-dom';
 
 
 const Products = () => {
@@ -118,7 +117,7 @@ const Products = () => {
       <div className='filter-products'>
         <div className='filter'>
           <div className={selectedCategory === '' ? 'all active' : 'all'} onClick={() => setSelectedCategory('')}>All Shoes</div>
-          <span style={{ borderTop: '1px solid #ccc', paddingTop: '3vh' }}>Gender</span>
+          <span className='gender'>Gender</span>
           <div className='selection'>
             <div className={selectedCategory === 'Men' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Men')}>Men</div>
             <div className={selectedCategory === 'Women' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Women')}>Women</div>

@@ -152,3 +152,72 @@
         }
     }
 }
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .navbar {
+        height: var(--navbar-height);
+
+        .top {
+            padding: 1vh 2vw;
+
+            .logo {
+                width: 100px;
+                height: 50px;
+            }
+
+            .middle {
+                .nav-link {
+                    font-size: 1.9rem;
+                    margin-left: 2.5vw;
+                }
+
+                .active {
+                    &::after {
+                        top: 1.8vh;
+                        width: 2.5vw;
+                        height: 0.3vh;
+                    }
+                }
+            }
+
+            .right-side {
+                .searchbar {
+                    padding: 0.8vh 1.4vw;
+
+                    .search-input {
+                        font-size: 1.4rem;
+                    }
+                }
+
+                .cart {
+                    .badge {
+                        top: 14px;
+                        right: 5px;
+                        padding: 2.5px 4px 0 4px;
+                        font-size: 1rem;
+                        line-height: 1rem;
+                    }
+                }
+            }
+        }
+
+        .bottom {
+            height: 2.5vh;
+            margin-top: -1px;
+
+            marquee {
+                font-size: 1.4rem;
+                line-height: 2.5vh;
+                height: 2.5vh;
+                margin-top: 0.2vh;
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {}

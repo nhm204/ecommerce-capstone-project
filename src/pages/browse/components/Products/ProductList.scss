@@ -5,7 +5,7 @@
     .filter-products {
         display: flex;
         justify-content: space-between;
-        padding: calc(var(--navbar-height) + 5vh + 4vh) 0 0;
+        padding: calc(var(--navbar-height) + var(--marquee-height) + 4vh) 0 0;
 
         .filter {
             display: flex;
@@ -24,7 +24,11 @@
                 &:hover {
                     margin-left: 8px;
                 }
+            }
 
+            .gender {
+                border-top: 1px solid #ccc;
+                padding-top: 3vh;
             }
             
             .active {
@@ -222,3 +226,103 @@
         }
     }
 }
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .products {
+        .filter-products {
+            padding: calc(var(--navbar-height) + var(--marquee-height) + 2vh) 0 0;
+
+            .filter {
+                margin: 1vh 4.5vw 1vh 5vw;
+                
+                .all {
+                    margin-top: 1.4vh;
+                    font-size: 1.5rem;
+                    line-height: 1.5rem;
+                }
+
+                .gender {
+                    padding-top: 2vh;
+                    margin-top: 1.5vh;
+                }
+
+                span {
+                    font-size: 2rem;
+                    margin: 2vh 0 1vh;
+                    padding: 0;
+                }
+
+                .selection {
+                    padding: 0 0 1.5vh;
+
+                    .option {
+                        font-size: 1.5rem;
+                        line-height: 1.5rem;
+                        margin-top: 0.8vh;
+                    }
+                }
+
+                .color-selection-header {
+                    span {
+                        font-size: 2rem;
+                        padding: 0;
+                    }
+    
+                    .clear-color {
+                        font-size: 1.5rem;
+                    }
+                }
+
+                .colors {
+                    .color {
+                        width: 30px;
+                        height: 30px;
+                        border: 2px solid white;
+                        margin-right: 1vw;
+                        margin-top: 1.2vh;
+                    }
+                }
+
+                .price {
+                    padding: 0;
+                }
+
+                .price-container {
+                    padding-bottom: 2vh;
+                }
+
+                .sort-product {
+                    .option {
+                        font-size: 1.5rem;
+                        line-height: 1.5rem;
+                        margin-top: 0.8vh;
+                    }
+
+                    .default {
+                        margin-top: 4vh;
+                        padding: 1vh 0 0.6vh;
+                    }
+                }
+            }
+
+            .products-wrapper {
+                padding: 0;
+
+                .product-list {
+                    li {
+                        min-width: 280px;
+                        margin: 1vh 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {}
