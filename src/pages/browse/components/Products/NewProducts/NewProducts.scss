@@ -1,4 +1,4 @@
-.featured-products {
+.new-products {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -11,7 +11,6 @@
 
         li {
             max-width: 22vw;
-            // flex: 1;
             min-width: 320px;
             margin: 2vh 0;
             padding: 0 1vw;
@@ -71,8 +70,6 @@
                 }
             }
         }
-
-        
     }
 }
 
@@ -82,7 +79,7 @@
 
 // Tablet
 @media (min-width: 46.25em) and (max-width: 63.9375em) {
-    .featured-products {
+    .new-products {
         padding: 0;
     
         .product-list {

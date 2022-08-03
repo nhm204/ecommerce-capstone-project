@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Navbar.scss';
 import { IoBagHandleOutline, IoCloseOutline } from "react-icons/io5";
 import { FiSearch } from "react-icons/fi";
-import { createSearchParams, Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryGetCustomer } from '../../data/queries/getCustomer';
 
 

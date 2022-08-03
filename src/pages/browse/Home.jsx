@@ -4,11 +4,14 @@ import { useQueryGetProductList } from '../../data/queries/getProduct';
 import Navbar from '../../common/Header/Navbar';
 import FeaturedProducts from './components/Products/FeaturedProducts/FeaturedProducts';
 import { Banner1, Banner2 } from './components/Banner/Banner';
+import Footer from '../../common/Footer/Footer';
+import NewProducts from './components/Products/NewProducts/NewProducts';
 
 
 const Home = () => {
   const { data } = useQueryGetProductList();
-  const products = data?.products; 
+  let products = data?.products.map((product) => product).reverse(); 
+  // products = products?.reverse();
 
   useEffect(() => { document.title = `Home. Nike For You` }, []);
 
@@ -26,7 +29,8 @@ const Home = () => {
         <h2>New Arrivals</h2>
         <p>New Collection New Modern Design</p>
       </div>
-
+      <NewProducts products={products} />
+      <Footer />
     </div>
   )
 }

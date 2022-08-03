@@ -1,8 +1,6 @@
 import React from 'react';
 import './FeaturedProducts.scss';
-import { Link } from 'react-router-dom';
 import Product from '../ProductCard/ProductCard';
-import { FaGreaterThan } from 'react-icons/fa';
 
 const FeaturedProducts = ({ products }) => {
   let featuredList = products?.filter(product => product.featuringFrom && product.featuringTo);
@@ -25,16 +23,11 @@ const FeaturedProducts = ({ products }) => {
   return (
     <div className='featured-products'>
       <ul className='product-list' style={{ justifyContent: 'center' }}>
-          { featuredList?.slice(0, 8).map((product, index) => (
+          { featuredList?.slice(0, 4).map(product => (
             <li key={product.id}>
               <Product product={product} />   
             </li>
           ))}
-          <Link to='/shop' className='more'>
-            <h4>Watch more</h4>
-            <FaGreaterThan className='icon' />
-            <FaGreaterThan className='icon' />
-          </Link>
       </ul>
     </div>
   )

@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useMutationAddItemToCart } from '../../../../../data/mutations/addToCart';
 import { useQueryGetCustomer } from '../../../../../data/queries/getCustomer';
 import Tag from '../../Tag/Tag';
+import { FaGreaterThan } from 'react-icons/fa';
 
 
 const Product = ({ product }) => {
@@ -43,8 +44,13 @@ const Product = ({ product }) => {
         </div>
       </Link>
       { product.stock !== 0 ? <button className='add' onClick={handleAdd}>Add to Bag</button> : <button className='add disable'>Out of Stock</button> }
+      <Link to='/shop' className='more'>
+        <h4>Watch more</h4>
+        <FaGreaterThan className='icon' />
+        <FaGreaterThan className='icon' />
+      </Link>
     </div>
-    || <div className='end'>There is no matching product</div>
+    // || <div className='end'>There is no matching product</div>
   )
 }
 
