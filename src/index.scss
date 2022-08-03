@@ -7,6 +7,11 @@
 html {
   font-size: 62.5%; /* 100% = 16 px => 62.5% = 10px */
   font-family: 'League Spartan', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
 
 h1 {

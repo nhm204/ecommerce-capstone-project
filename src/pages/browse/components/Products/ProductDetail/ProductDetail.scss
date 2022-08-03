@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    padding: calc(var(--navbar-height) + var(--marquee-height) + 4vh) 4vw 4vh;
+    padding: calc(var(--navbar-height) + var(--marquee-height) + 4vh) 4vw 8vh;
 
     .tag {
         position: absolute;
@@ -204,6 +204,7 @@
 @media (min-width: 46.25em) and (max-width: 63.9375em) {
     .product-detail {
         padding: calc(var(--navbar-height) + var(--marquee-height) + 1vh) 3vw 4vh;
+        flex-direction: column;
 
         .tag {
             top: 12vh;
@@ -212,20 +213,22 @@
         }
 
         .image-container {
-            width: 50vw;
+            width: 96vw;
             flex-wrap: nowrap;
             overflow-x: scroll;
             scroll-snap-type: x mandatory;
 
             img, video {
-                width: 50vw;
+                width: 46vw;
+                margin: 1vh 2vw 1vh 0;
                 scroll-snap-align: start;
                 scroll-snap-stop: always;
             }
         }
 
         .detail {
-            width: 40vw;
+            width: 94vw;
+            padding: 1vh 0 0;
 
             .name {
                 font-size: 4.4rem;
@@ -273,6 +276,14 @@
             .add {
                 padding: 2vh 0;
                 margin: 6vh 0 3vh;
+
+                &:hover {
+                    color: white;
+                    background-color: var(--primary-color);
+                    border-color: var(--primary-color);
+                    outline: none;
+                    font-weight: 400;
+                }
             }
         }
 

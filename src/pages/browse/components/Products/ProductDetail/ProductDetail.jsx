@@ -6,6 +6,7 @@ import { useQueryGetProductList } from '../../../../../data/queries/getProduct';
 import { useQueryGetCustomer } from '../../../../../data/queries/getCustomer';
 import { useMutationAddItemToCart } from '../../../../../data/mutations/addToCart';
 import Tag from '../../Tag/Tag';
+import Footer from '../../../../../common/Footer/Footer';
 
 
 const ProductDetail = () => {
@@ -108,6 +109,7 @@ const ProductDetail = () => {
           <h4 className='quote'>Keep pushing your runs to the limit. The {product.name} keeps you going with the same supersoft feel that lets you feel the potential when your foot hits the pavement. We created the shoe with plenty of snappy responsiveness and our highest level of support to keep you feeling secure and competitive. It's one of our most tested shoes, still designed for you to stay on the track and away from the sidelines.</h4>
         </div>
       </div>
+      <Footer />
     </div>
   )
 }

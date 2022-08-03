@@ -5,6 +5,7 @@ import { useQueryGetProductList } from '../../../../data/queries/getProduct';
 import Navbar from '../../../../common/Header/Navbar';
 import Pagination from '../Pagination/Pagination';
 import { Banner4 } from '../Banner/Banner';
+import Footer from '../../../../common/Footer/Footer';
 
 
 const Products = () => {
@@ -168,6 +169,7 @@ const Products = () => {
         </div>
       </div>
       <Banner4 />
+      <Footer />
       <Outlet />
     </div>
   )
