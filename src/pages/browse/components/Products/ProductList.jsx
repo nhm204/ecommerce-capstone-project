@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { Outlet } from 'react-router-dom';
 import './ProductList.scss';
 import { useQueryGetProductList } from '../../../../data/queries/getProduct';
-import Navbar from '../../../../common/Header/Navbar';
+import Header from '../../../../common/Header/Header';
 import Pagination from '../Pagination/Pagination';
 import { Banner4 } from '../Banner/Banner';
 import Footer from '../../../../common/Footer/Footer';
@@ -114,7 +114,7 @@ const Products = () => {
 
   return (
     <div className='products'>
-      <Navbar setSearchQuery={setSearchQuery} setSelectedCategory={setSelectedCategory} searchValue={searchQuery} link={'Shop'} />
+      <Header setSearchQuery={setSearchQuery} setSelectedCategory={setSelectedCategory} searchValue={searchQuery} link={'Shop'} />
       <div className='filter-products'>
         <div className='filter'>
           <div className={selectedCategory === '' ? 'all active' : 'all'} onClick={() => setSelectedCategory('')}>All Shoes</div>

@@ -1,10 +1,10 @@
 import React from 'react'
-import Navbar from '../../common/Header/Navbar'
+import Header from '../../common/Header/Header'
 
 const Owner = () => {
   return (
     <>
-      <Navbar link={'Owner'} />
+      <Header link={'Owner'} />
       <h2>Owner</h2>
     </>
   )

@@ -1,5 +1,5 @@
 import React, { useCallback, useState, useEffect } from 'react';
-import Navbar from '../../../../../common/Header/Navbar';
+import Header from '../../../../../common/Header/Header';
 import './ProductDetail.scss';
 import { useParams } from 'react-router-dom';
 import { useQueryGetProductList } from '../../../../../data/queries/getProduct';
@@ -55,7 +55,7 @@ const ProductDetail = () => {
 
   return (
     <div id={productId}>
-      <Navbar link={'Shop'} />
+      <Header link={'Shop'} />
       <div className='product-detail'>
         <Tag product={product} />
         <div className='image-container'>

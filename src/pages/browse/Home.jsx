@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import './Home.scss';
 import { useQueryGetProductList } from '../../data/queries/getProduct';
-import Navbar from '../../common/Header/Navbar';
+import Header from '../../common/Header/Header';
 import FeaturedProducts from './components/Products/FeaturedProducts/FeaturedProducts';
 import { Banner1, Banner2 } from './components/Banner/Banner';
 import Footer from '../../common/Footer/Footer';
@@ -17,7 +17,7 @@ const Home = () => {
 
   return (
     <div className='home'>
-      <Navbar link={'Home'} />
+      <Header link={'Home'} />
       <Banner1 />
       <div className='header'>
         <h2>Featured Products</h2>

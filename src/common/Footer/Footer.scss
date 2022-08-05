@@ -103,6 +103,7 @@
         align-items: center;
         justify-content: space-between;
         padding: 2vh 0 2vh;
+        user-select: none;
 
         .location {
             display: flex;

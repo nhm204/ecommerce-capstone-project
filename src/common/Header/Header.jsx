@@ -1,12 +1,12 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
-import './Navbar.scss';
+import React, { useEffect, useState } from 'react';
+import './Header.scss';
 import { IoBagHandleOutline, IoCloseOutline } from "react-icons/io5";
 import { FiSearch, FiMenu } from "react-icons/fi";
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryGetCustomer } from '../../data/queries/getCustomer';
 
 
-const Navbar = ({ setSearchQuery, searchValue, setSelectedCategory, link }) => {
+const Header = ({ setSearchQuery, searchValue, setSelectedCategory, link }) => {
   const { data } = useQueryGetCustomer();
   const [ searchParams, setSearchParams ] = useSearchParams();
   const [ inputValue, setInputValue] = useState('');
@@ -20,7 +20,6 @@ const Navbar = ({ setSearchQuery, searchValue, setSelectedCategory, link }) => {
     }
   }
   
-  // useEffect(() => setSearchParams(), []);
   useEffect(() => setInputValue(searchValue), [searchValue]);
 
   const handleChange = (e) => {
@@ -40,8 +39,8 @@ const Navbar = ({ setSearchQuery, searchValue, setSelectedCategory, link }) => {
  
  
   return (
-    <nav className='navbar'>
-      <div className='top'>
+    <div className='app-header'>
+      <nav className='navbar'>
         <div className='left-side'>
           <Link to='/' className={navLinkSelected === 'Home' ? 'nav-link active' : 'nav-link'} onClick={() => setNavLinkSelected('Home')}>Home</Link>
           <Link to='/shop' className={navLinkSelected === 'Shop' ? 'nav-link active' : 'nav-link'} onClick={() => setNavLinkSelected('Shop')}>Shop</Link>
@@ -81,12 +80,12 @@ const Navbar = ({ setSearchQuery, searchValue, setSelectedCategory, link }) => {
           </div>
           
         </div>
-      </div>
-      <div className='bottom'>
+      </nav>
+      <div className='marquee-wrapper'>
         <marquee direction="left">FREE SHIPPING + RETURNS, FREE MEMBERSHIP, EXCLUSIVE PRODUCTS</marquee>
       </div>
-    </nav>
+    </div>
   )
 }
 
-export default Navbar;
+export default Header;
