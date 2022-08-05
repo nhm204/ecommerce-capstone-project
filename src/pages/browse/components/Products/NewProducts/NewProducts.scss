@@ -18,42 +18,7 @@
             &:last-child .product-wrapper {
 
                 .more {
-                    position: absolute;
                     display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    height: 100%;
-                    width: 100%;
-                    cursor: pointer;
-                    color: white;
-                    border-radius: 25px;
-                    outline: 1px solid rgba($color: #000000, $alpha: 0.7);
-                    background-color: rgba($color: #000000, $alpha: 0.7);
-                    z-index: 3;
-        
-                    h4 {
-                        font-size: 3.5rem;
-                        line-height: 4.5rem;
-                    }
-        
-                    .icon {
-                        font-size: 1.6rem;
-                        color: darkorange;
-                        animation: slideIn ease-in 0.4s;
-                        display: none;
-                    }
-                    
-                    &:hover .icon {
-                        display: block;
-                    }
-
-                    &:hover h4 {
-                        margin-right: 0.8vw;
-                    }
                 }
 
                 &:hover {
@@ -75,7 +40,25 @@
 
 
 // Tablet & mobile
-@media (max-width: 63.9375em) {}
+@media (max-width: 63.9375em) {
+    .new-products {
+        .product-list {
+            li {
+                &:last-child .product-wrapper {
+                    .more {
+                        h4 {
+                            margin-right: 0.6vw;
+                        }
+            
+                        .icon {
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
 
 // Tablet
 @media (min-width: 46.25em) and (max-width: 63.9375em) {
@@ -88,25 +71,14 @@
             li {
                 margin: 1vh 0;
                 padding: 0 1.5vw;
-
-                &:last-child .product-wrapper {
-                    .more {
-            
-                        h4 {
-                            margin-right: 0.5vw;
-                        }
-            
-                        .icon {
-                            display: block;
-                        }
-                    }
-                }
             }
-    
-            
         }
     }
 }
 
 // Mobile
-@media (max-width: 46.1875em) {}
+@media (max-width: 46.1875em) {
+    .new-products {
+        padding: 0 0 12vh;
+    }
+}

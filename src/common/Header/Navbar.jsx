@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import './Navbar.scss';
 import { IoBagHandleOutline, IoCloseOutline } from "react-icons/io5";
-import { FiSearch } from "react-icons/fi";
+import { FiSearch, FiMenu } from "react-icons/fi";
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { useQueryGetCustomer } from '../../data/queries/getCustomer';
 
@@ -20,6 +20,7 @@ const Navbar = ({ setSearchQuery, searchValue, setSelectedCategory, link }) => {
     }
   }
   
+  // useEffect(() => setSearchParams(), []);
   useEffect(() => setInputValue(searchValue), [searchValue]);
 
   const handleChange = (e) => {
@@ -41,13 +42,17 @@ const Navbar = ({ setSearchQuery, searchValue, setSelectedCategory, link }) => {
   return (
     <nav className='navbar'>
       <div className='top'>
-        <Link to='/' className='logo'></Link>
-        <div className='middle'>
+        <div className='left-side'>
           <Link to='/' className={navLinkSelected === 'Home' ? 'nav-link active' : 'nav-link'} onClick={() => setNavLinkSelected('Home')}>Home</Link>
           <Link to='/shop' className={navLinkSelected === 'Shop' ? 'nav-link active' : 'nav-link'} onClick={() => setNavLinkSelected('Shop')}>Shop</Link>
           <Link to='/owner' className={navLinkSelected === 'Owner' ? 'nav-link active' : 'nav-link'} onClick={() => setNavLinkSelected('Owner')}>Owner</Link>
         </div>
+        <Link to='/' className='logo'></Link>
         <div className='right-side'>
+          <label for='nav-mobile-search' className='mobile-search-btn'>
+            <FiSearch />
+          </label>
+          <input type='checkbox' id='nav-mobile-search' hidden className='nav-search-checkbox-input' />
           <div className="searchbar">
             <FiSearch className='icon' />
             <input type='text' placeholder='Search' className='search-input' value={inputValue} onKeyPress={handleDirect} onChange={handleChange} />
@@ -57,6 +62,24 @@ const Navbar = ({ setSearchQuery, searchValue, setSelectedCategory, link }) => {
             <IoBagHandleOutline className='cart-icon' />
             <div className='badge'>{data?.customer.items.length}</div>
           </Link>
+
+          {/* Navbar for mobile */}
+          <label for='nav-mobile-input' className='nav-mobile-btn'>
+            <FiMenu />
+          </label>
+          <input type='checkbox' id='nav-mobile-input' className='nav-checkbox-input' />
+          <label for="nav-mobile-input" className="nav-overlay"></label>
+          <div className='nav-mobile-wrapper'>
+            <label for='nav-mobile-input' className='close'>
+              <IoCloseOutline />       
+            </label>
+            <div className="nav-mobile">
+              <Link to='/' className={navLinkSelected === 'Home' ? 'nav-link active' : 'nav-link'} onClick={() => setNavLinkSelected('Home')}>Home</Link>
+              <Link to='/shop' className={navLinkSelected === 'Shop' ? 'nav-link active' : 'nav-link'} onClick={() => setNavLinkSelected('Shop')}>Shop</Link>
+              <Link to='/owner' className={navLinkSelected === 'Owner' ? 'nav-link active' : 'nav-link'} onClick={() => setNavLinkSelected('Owner')}>Owner</Link>
+            </div>
+          </div>
+          
         </div>
       </div>
       <div className='bottom'>

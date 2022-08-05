@@ -50,7 +50,6 @@ const Product = ({ product }) => {
         <FaGreaterThan className='icon' />
       </Link>
     </div>
-    // || <div className='end'>There is no matching product</div>
   )
 }
 

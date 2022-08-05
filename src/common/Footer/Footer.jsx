@@ -75,8 +75,10 @@ const Footer = () => {
         </div>
       </div>
       <div className="bottom">
-        <MdLocationOn />
-        <div>Vietnam</div>
+        <div className="location">
+          <MdLocationOn />
+          <div>Ho Chi Minh City, Vietnam</div>
+        </div>
         <div className='sm-text'>© 2022 NAB WeCamp Capstone Project. All Rights Reserved</div>
       </div>
     </div>

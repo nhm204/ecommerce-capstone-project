@@ -20,7 +20,13 @@
 
 
 // Tablet & mobile
-@media (max-width: 63.9375em) {}
+@media (max-width: 63.9375em) {
+    .home {
+        .header {
+            padding: 8vh 0 2vh;
+        }
+    }
+}
 
 // Tablet
 @media (min-width: 46.25em) and (max-width: 63.9375em) {
@@ -32,4 +38,6 @@
 }
 
 // Mobile
-@media (max-width: 46.1875em) {}
+@media (max-width: 46.1875em) {
+    
+}

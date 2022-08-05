@@ -20,7 +20,7 @@ const Home = () => {
       <Navbar link={'Home'} />
       <Banner1 />
       <div className='header'>
-        <h2>Feature Products</h2>
+        <h2>Featured Products</h2>
         <p>Featured Collection For This Autumn</p>
       </div>
       <FeaturedProducts products={products} />
