@@ -3,20 +3,25 @@ import Header from '../../../../../common/Header/Header';
 import './ProductDetail.scss';
 import { useParams } from 'react-router-dom';
 import { useQueryGetProductList } from '../../../../../data/queries/getProduct';
-import { useQueryGetCustomer } from '../../../../../data/queries/getCustomer';
+import { GET_CUSTOMER } from '../../../../../data/queries/getCustomer';
 import { useMutationAddItemToCart } from '../../../../../data/mutations/addToCart';
 import Tag from '../../Tag/Tag';
 import Footer from '../../../../../common/Footer/Footer';
+import { useQuery } from '@apollo/client';
 
 
 const ProductDetail = () => {
   const { loading, error, data } = useQueryGetProductList();
-  const customerQuery = useQueryGetCustomer();
   const [ addItemToCartMutation ] = useMutationAddItemToCart();
   const [ size, setSize ] = useState();
   const [ sizeSelected, setSizeSelected] = useState();
   const [ color, setColor ] = useState();
   const [ colorSelected, setColorSelected] = useState();
+  const customerQuery = useQuery(GET_CUSTOMER, {
+    variables: {
+      'customerId': 'hmy'
+    }
+  });
   const paramValue = useParams();
   const productId = paramValue.id;
   const productName = paramValue.name;
@@ -28,27 +33,30 @@ const ProductDetail = () => {
   // const productsColorObj = productList.map((product) => product.colors.map((color) => color.name)); // lấy ra tên màu từ obj colors
   // const productsColorObj = data?.products.map((product) => product.colors); // lấy ra màu từ obj colors
 
-  useEffect(() => {
-    document.title = `${product?.name}`
-  }, [product?.name]);
+  // Update the document title using the browser API
+  useEffect(() => { 
+    document.title = `${product?.name}. ${product?.description}`;
+    window.scrollTo(0, 0);
+  }, [product?.name, product?.description]);
 
   const handleAdd = useCallback(() => {
     addItemToCartMutation ({
       variables: {
-        customerId: "hmy",
+        customerId: 'hmy',
         item: {
           productId: product.id,
           color: color,
           size: size,
           quantity: 1
-        }
-      }
+        },
+      },
+      // fetchPolicy: "no-cache",
     }).then(() => {
       customerQuery.refetch();
     })
   }, [addItemToCartMutation, product?.id, color, size, customerQuery]);
 
-  console.log(colorSelected, sizeSelected)
+  // console.log(colorSelected, sizeSelected)
 
   if (error) return <h1>Error: {error} </h1>;
   if (loading) return <h2 style={{ textAlign: 'center', padding: '12vh 0', fontWeight: '500' }}>Loading your product...</h2>;

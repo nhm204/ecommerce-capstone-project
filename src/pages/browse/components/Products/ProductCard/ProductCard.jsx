@@ -2,21 +2,27 @@ import React, { useCallback } from 'react';
 import './ProductCard.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMutationAddItemToCart } from '../../../../../data/mutations/addToCart';
-import { useQueryGetCustomer } from '../../../../../data/queries/getCustomer';
+import { GET_CUSTOMER } from '../../../../../data/queries/getCustomer';
 import Tag from '../../Tag/Tag';
 import { FaGreaterThan } from 'react-icons/fa';
+import { useQuery } from '@apollo/client';
 
 
 const Product = ({ product }) => {
   const [ addItemToCartMutation ] = useMutationAddItemToCart();
-  const customerQuery = useQueryGetCustomer();
+  const customerQuery = useQuery(GET_CUSTOMER, {
+    variables: {
+      'customerId': 'hmy'
+    }
+  });
   const navigate = useNavigate();
 
+  
   const handleAdd = useCallback(() => {
     if (product.colors.length === 1 && product.sizes.length === 1) {
       addItemToCartMutation ({
         variables: {
-          customerId: "hmy",
+          customerId: 'hmy',
           item: {
             productId: product.id,
             color: product.colors[0].name,
